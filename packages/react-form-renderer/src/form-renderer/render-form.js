@@ -90,11 +90,15 @@ const SingleField = ({ component, condition, hideField, ...rest }) => {
   const { actionMapper, componentMapper } = useContext(RendererContext);
 
   const { componentProps, Component, overrideProps, mergedResolveProps } = prepareComponentProps({ component, rest, componentMapper, actionMapper });
-
+  const mergedProps = {
+    ...componentProps,
+    ...overrideProps,
+    ...(mergedResolveProps && { resolveProps: mergedResolveProps }),
+  };
   return (
-    <FormConditionWrapper condition={condition} field={componentProps}>
+    <FormConditionWrapper condition={condition} field={mergedProps}>
       <FormFieldHideWrapper hideField={hideField}>
-        <Component {...componentProps} {...overrideProps} {...(mergedResolveProps && { resolveProps: mergedResolveProps })} />
+        <Component {...mergedProps} />
       </FormFieldHideWrapper>
     </FormConditionWrapper>
   );

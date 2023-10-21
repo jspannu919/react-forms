@@ -98,7 +98,7 @@ const Condition = React.memo(
 
     return conditionResult.visible ? children : null;
   },
-  (a, b) => isEqual(a.values, b.values) && isEqual(a.condition, b.condition)
+  (a, b) => isEqual(a.values, b.values) && isEqual(a.condition, b.condition) && isEqual(a.field, b.field)
 );
 
 const conditionProps = {
